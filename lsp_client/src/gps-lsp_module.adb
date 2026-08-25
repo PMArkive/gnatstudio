@@ -109,7 +109,7 @@ with GPS.LSP_Clients;
 with GPS.Messages_Windows;              use GPS.Messages_Windows;
 with GPS.Scripts.Commands;              use GPS.Scripts.Commands;
 with Language;                          use Language;
-with LSP.Client_Notification_Receivers;
+with LSP.Client_Notification_Receivers_3_16;
 with LSP.Messages;
 with LSP.Types;                         use LSP.Types;
 with Outline_View;                      use Outline_View;
@@ -257,7 +257,7 @@ package body GPS.LSP_Module is
 
    type Module_Id_Record is
      new GPS.Kernel.Modules.Module_ID_Record
-     and LSP.Client_Notification_Receivers.Client_Notification_Receiver
+     and LSP.Client_Notification_Receivers_3_16.Client_Notification_Receiver
      and GPS.LSP_Client.Language_Servers.Interceptors.Server_Listener
    with record
       Language_Servers   : Language_Server_Maps.Map;
@@ -349,7 +349,7 @@ package body GPS.LSP_Module is
    overriding function Get_Progress_Type
      (Self  : access Module_Id_Record;
       Token : LSP.Types.LSP_Number_Or_String)
-      return LSP.Client_Notification_Receivers.Progress_Value_Kind;
+      return LSP.Client_Notification_Receivers_3_16.Progress_Value_Kind;
 
    overriding procedure On_Progress
      (Self  : access Module_Id_Record;
@@ -1809,9 +1809,9 @@ package body GPS.LSP_Module is
    overriding function Get_Progress_Type
      (Self  : access Module_Id_Record;
       Token : LSP.Types.LSP_Number_Or_String)
-      return LSP.Client_Notification_Receivers.Progress_Value_Kind is
+      return LSP.Client_Notification_Receivers_3_16.Progress_Value_Kind is
    begin
-      return LSP.Client_Notification_Receivers.ProgressParams;
+      return LSP.Client_Notification_Receivers_3_16.ProgressParams;
    end Get_Progress_Type;
 
    -----------------

@@ -468,7 +468,7 @@ package body GPS.LSP_Clients is
 
    overriding procedure On_Exit_Notification (Self : access LSP_Client) is
    begin
-      LSP.Clients.Client (Self.all).On_Exit_Notification;
+      LSP.Clients_3_16.Client (Self.all).On_Exit_Notification;
       Self.Exiting := True;
    end On_Exit_Notification;
 
@@ -483,7 +483,7 @@ package body GPS.LSP_Clients is
          GNATCOLL.VFS.Write (Self.Errors_Writable_File, Text);
 
       else
-         LSP.Clients.Client (Self).On_Standard_Error_Message (Text);
+         LSP.Clients_3_16.Client (Self).On_Standard_Error_Message (Text);
       end if;
    end On_Standard_Error_Message;
 
@@ -902,7 +902,7 @@ package body GPS.LSP_Clients is
             OK : Boolean := True;
 
          begin
-            LSP.Clients.Client (Self).On_Raw_Message (Data, OK);
+            LSP.Clients_3_16.Client (Self).On_Raw_Message (Data, OK);
 
             if not OK then
                if Self.Is_Ready then
