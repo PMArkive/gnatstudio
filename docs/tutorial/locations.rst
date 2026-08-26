@@ -10,8 +10,8 @@ which now contains all the references for `View`, grouped by files
 
 The first location is highlighted automatically: this is the spec of the
 procedure `View`. Now click in the tree on the triangle at the
-left of :file:`stack.adb`: two locations are listed, at line 90 and 97.  Click
-on each of these locations: they correspond to the procedure body.
+left of :file:`stack.adb`: one location is listed, at line 90. Click
+on this location: it corresponds to the procedure body.
 
 The `Find all references` capability is another way to list all the uses of an
 entity, and it confirms that `View` isn't called in our project.
