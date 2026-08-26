@@ -63,5 +63,6 @@ not decremented.
 Fix the line to `Last := Last + 1;`
 
 Save the file (:kbd:`Ctrl-S`); End the debug session: `Debug terminate` toolbar
-button; Rebuild (press :kbd:`F4` key); Rerun (menu `Build->Run->sdc`, click on
-`Execute`): the program now completes as expected. Close the execution window.
+button; Rebuild (press :kbd:`F4` key); Rerun (menu `Build->Run->Run Main sdc`,
+click on `Execute`): the program now completes as expected. Close the execution
+window.
