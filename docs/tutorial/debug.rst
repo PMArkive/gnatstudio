@@ -9,9 +9,9 @@ raised. Click on `Close` to close dialog.
 
 Now click on the `Build & Debug sdc.adb` toolbar button: GNAT Studio
 automatically switches to the *Debug* perspective as shown in the menu
-`Window->Perspectives`, and new windows have appeared: the variables window,
-the breakpoints view and the debugger console at the bottom, and the call
-stack window on the right.
+`Window->Perspectives`, and new windows have appeared: the variables window and
+the call stack window on the right, the breakpoints view on the left, and the
+debugger console at the bottom.
 
 You can also look at the various debug menu item and tool bar buttons which are
 now activated.
@@ -36,26 +36,25 @@ displayed showing the value of `T`. You have probably noticed that tool tips,
 like menus, are contextual: depending on the current session and on the entity
 selected, different information is displayed.
 
-Select the contextual menu `Debug->Display T`: this will open the
-`Debugger Variables` view, displaying graphically the contents of the different
+Select the contextual menu `Debug->Display T in Variables View`: this will open
+the `Variables` view, displaying graphically the contents of the different
 fields of `T`, each clearly separated.
 
-Special colors are used in the data display depending on your theme: one
-for pointers that can be dereferenced by a double-click (double click
-on `T.val`); another one for fields that have been modified since last step.
+Special colors are used in the data display depending on your theme for fields
+that have been modified since last step.
 
-From the T box, right-click to display the contextual menu and select `View
-memory at address of T`: a memory view is opened on top of the source editors.
+From the T row, right-click to display the contextual menu and select
+`Debug/View memory at address of T`: a memory view is opened on right side.
 Use the `up` and `down` arrows on the right to visit memory.
 
-Click in the memory dump, and modify it by typing numbers. Notice the red color
-for modified values; click on `Undo Changes` to cancel the modifications; then
-close the memory window by e.g. clicking on the `x` icon in the tab or pressing
-:kbd:`Ctrl-W`.
+Click in the memory dump, and modify it by typing numbers. Notice the green
+color for modified values; click on `Undo Changes` to cancel the modifications;
+then close the memory window by e.g. clicking on the `x` icon in the tab or
+pressing :kbd:`Ctrl-W`.
 
 In the call stack, go back to the `stack.push` frame.  Move the mouse
 over `Last` and let the debugger display its value: 0.  From the contextual
-menu, select `Goto declaration of Last`: this will jump to the line 16 of
+menu, select `Go To Declaration`: this will jump to the line 16 of
 :file:`stack.adb`, where you can see that `Last` is a `Natural`. Now click on
 the `Goto Previous Location` button in the tool bar: we're now back at line 49
 where we can see that for a `Push` procedure, `Last` should be incremented, and
@@ -64,5 +63,6 @@ not decremented.
 Fix the line to `Last := Last + 1;`
 
 Save the file (:kbd:`Ctrl-S`); End the debug session: `Debug terminate` toolbar
-button; Rebuild (press :kbd:`F4` key); Rerun (menu `Build->Run->sdc`, click on
-`Execute`): the program now completes as expected. Close the execution window.
+button; Rebuild (press :kbd:`F4` key); Rerun (menu `Build->Run->Run Main sdc`,
+click on `Execute`): the program now completes as expected. Close the execution
+window.
