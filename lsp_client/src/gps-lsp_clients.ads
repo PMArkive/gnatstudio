@@ -32,9 +32,9 @@ with GPS.Kernel;
 with GPS.LSP_Client.Requests;
 with GPS.LSP_Client.Text_Documents;
 
-with LSP.Clients.Response_Handlers;
-with LSP.Clients.Request_Handlers;
-with LSP.Clients;
+with LSP.Clients_3_16.Response_Handlers;
+with LSP.Clients_3_16.Request_Handlers;
+with LSP.Clients_3_16;
 with LSP.Messages.Server_Responses;
 with LSP.Types;
 with Spawn.String_Vectors;
@@ -92,7 +92,7 @@ package GPS.LSP_Clients is
      (Kernel   : not null access GPS.Kernel.Kernel_Handle_Record'Class;
       Listener : not null access LSP_Client_Listener'Class;
       Language : not null access Language_Root'Class)
-   is limited new LSP.Clients.Client
+   is limited new LSP.Clients_3_16.Client
      and GPS.LSP_Client.Text_Documents.Text_Document_Server_Proxy
    with private;
    --  Client represents a connect to LSP server for some language
@@ -196,7 +196,7 @@ private
       "="                 => LSP.Types."=");
 
    type Response_Handler (Client : access LSP_Client) is
-     new LSP.Clients.Response_Handlers.Response_Handler with null record;
+     new LSP.Clients_3_16.Response_Handlers.Response_Handler with null record;
 
    overriding procedure Initialize_Response
      (Self     : not null access Response_Handler;
@@ -204,7 +204,7 @@ private
       Response : LSP.Messages.Server_Responses.Initialize_Response);
 
    type Request_Handler (Client : access LSP_Client) is
-     new LSP.Clients.Request_Handlers.Request_Handler with null record;
+     new LSP.Clients_3_16.Request_Handlers.Request_Handler with null record;
 
    overriding procedure Workspace_Apply_Edit
      (Self    : not null access Request_Handler;
@@ -256,7 +256,7 @@ private
      (Kernel   : not null access GPS.Kernel.Kernel_Handle_Record'Class;
       Listener : not null access LSP_Client_Listener'Class;
       Language : not null access Language_Root'Class) is
-   limited new LSP.Clients.Client
+   limited new LSP.Clients_3_16.Client
      and GPS.LSP_Client.Text_Documents.Text_Document_Server_Proxy
    with record
       Is_Ready                      : Boolean := False;
