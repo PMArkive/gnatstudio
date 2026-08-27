@@ -173,17 +173,22 @@ def run_test():
 
     # --- Test: fix is refused when code has been manually modified ---
     GPS.Analysis.clean()
-    buf.delete(buf.beginning_of_buffer(), buf.end_of_buffer())
-    buf._insert_at_location(buf.beginning_of_buffer(), ORIGINAL)
+    with buf.new_undo_group():
+        buf.delete(buf.beginning_of_buffer(), buf.end_of_buffer())
+        buf._insert_at_location(buf.beginning_of_buffer(), ORIGINAL)
     yield wait_idle()
 
     yield load_sarif("fixes.sarif")
 
-    # Manually edit the region that the deletion fix targets (line 7)
+    # Manually edit the region that the deletion fix targets (line 7).
+    # This must be its own undo group: otherwise some platforms' undo
+    # managers may coalesce it with the buffer reset above, so a single
+    # buf.undo() below would revert both and orphan the fix's marks.
     msg = find_message_at_line(7)
     gps_assert(msg is not None, True, "no message for corruption test")
     loc = buf.at(7, 4)
-    buf._insert_at_location(loc, "-- edited\n")
+    with buf.new_undo_group():
+        buf._insert_at_location(loc, "-- edited\n")
     yield wait_idle()
     modified_text = buf.get_chars()
 
@@ -198,7 +203,7 @@ def run_test():
     msg.execute_action()
     yield wait_idle()
     gps_assert(
-        buf.get_chars().replace("\r\n", "\n"),
+        buf.get_chars().replace("\r", ""),
         AFTER_DELETION,
         "fix not applied after undo",
     )
