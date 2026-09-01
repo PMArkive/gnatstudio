@@ -38,7 +38,7 @@ package body GPS.Kernel.Spawns is
 
    Me : constant Trace_Handle := Create ("GPS.KERNEL.SPAWN", Off);
    --  Disable Spawn as the default API to launch external processes
-   --  until we solve the remaining issues (#538 and #495).
+   --  until we solve the remaining issues (#538).
 
    Me_IO : constant Trace_Handle := Create
      ("GPS.KERNEL.SPAWN_IO", Off);
@@ -371,10 +371,13 @@ package body GPS.Kernel.Spawns is
       pragma Unreferenced (Console);
       use all type Spawn.Process_Status;
 
-      Last : Ada.Streams.Stream_Element_Offset := Input'Length;
-      Data : Ada.Streams.Stream_Element_Array (1 .. Last)
-        with Import, Address => Input'Address;
-      Ok   : Boolean := True;
+      --  Append a `Line_Feed`, so complete line is sent to the external
+      --  process.
+      Input_LF : aliased constant String := Input & ASCII.LF;
+      Last     : Ada.Streams.Stream_Element_Offset := Input_LF'Length;
+      Data     : Ada.Streams.Stream_Element_Array (1 .. Last)
+        with Import, Address => Input_LF'Address;
+      Ok       : Boolean := True;
 
       Command : Monitor_Command
         with Import, Address => User_Data;

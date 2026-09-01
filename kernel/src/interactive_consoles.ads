@@ -68,6 +68,10 @@ package Interactive_Consoles is
        (Console   : access Interactive_Console_Record'Class;
         Input     : String;
         User_Data : System.Address) return String;
+   --  `Input` is the line typed by the user, with the terminating newline
+   --  stripped. A handler that forwards `Input` to an external process
+   --  expecting complete lines (e.g. its standard input) is responsible for
+   --  adding back a line terminator itself: the console does not do it.
 
    type Interrupt_Handler is access function
      (Console   : access Interactive_Console_Record'Class;

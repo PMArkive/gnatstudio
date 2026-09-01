@@ -1329,6 +1329,10 @@ package body Interactive_Consoles is
               (Console.Buffer, Prompt_Iter, Console.Prompt_Mark);
             Get_End_Iter (Console.Buffer, Last_Iter);
             Backward_Char (Last_Iter, Ignore);
+            --  `Command` below excludes the LF inserted above: see
+            --  `Command_Handler` in `interactive_consoles.ads` for the
+            --   contract this implies on handlers that forward it to an
+            --   external process.
 
             declare
                Command : constant String :=
