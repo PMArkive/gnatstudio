@@ -38,7 +38,7 @@ package body GPS.Kernel.Spawns is
 
    Me : constant Trace_Handle := Create ("GPS.KERNEL.SPAWN", Off);
    --  Disable Spawn as the default API to launch external processes
-   --  until we solve the remaining issues (#538 and #495).
+   --  until we solve the remaining issues (#538).
 
    Me_IO : constant Trace_Handle := Create
      ("GPS.KERNEL.SPAWN_IO", Off);
